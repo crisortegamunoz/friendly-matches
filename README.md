@@ -30,6 +30,23 @@ FriendlyMatches es una plataforma que conecta equipos deportivos para facilitar 
 
 ---
 
+## Dependencias del Proyecto
+
+Este proyecto utiliza las siguientes librerías y módulos de NestJS para su funcionamiento, gestión de datos, validación y documentación:
+
+- @nestjs/config
+- @nestjs/mapped-types
+- @nestjs/axios
+- axios
+- @nestjs/swagger
+- swagger-ui-express
+- @nestjs/mongoose
+- mongoose
+- class-transformer
+- class-validator
+- joi
+- rxjs
+
 ## Instalación
 
 1. Clonar el repositorio:
