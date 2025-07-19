@@ -4,4 +4,4 @@ export class CreateMatchResultDTO {
 
 }
 
-export class UpdateMatchDTO extends PartialType(CreateMatchResultDTO) { }
+export class UpdateMatchResultDTO extends PartialType(CreateMatchResultDTO) { }
