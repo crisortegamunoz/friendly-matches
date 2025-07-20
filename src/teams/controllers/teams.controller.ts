@@ -3,7 +3,7 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/s
 
 import { Filter } from '../../common/filters/filter.dto';
 import { CreateTeamDTO, UpdateTeamDTO } from '../dtos/team.dto';
-import { TeamsService } from '../service/teams.service';
+import { TeamsService } from '../services/teams.service';
 
 @ApiTags('teams')
 @Controller('teams')

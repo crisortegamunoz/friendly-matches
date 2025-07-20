@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 
-import { ReputationLogsService } from '../service/reputation-logs.service';
+import { ReputationLogsService } from '../services/reputation-logs.service';
 import { Filter } from '../../common/filters/filter.dto';
 import { CreateReputationLogDTO, UpdateReputationLogDTO } from '../dtos/reputationLog.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';

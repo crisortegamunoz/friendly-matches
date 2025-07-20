@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { MatchResultsService } from '../service/match-results.service';
+import { MatchResultsService } from '../services/match-results.service';
 import { CreateMatchResultDTO, UpdateMatchResultDTO } from '../dtos/matchResult.entity';
 import { Filter } from '../../common/filters/filter.dto';
 

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { UsersService } from '../service/users.service';
+import { UsersService } from '../services/users.service';
 import { CreateUserDTO, UpdateUserDTO } from './../dtos/user.dto';
 import { Filter } from '../../common/filters/filter.dto';
 

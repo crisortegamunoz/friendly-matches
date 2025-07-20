@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Filter } from '../../common/filters/filter.dto';
-import { MatchesService } from '../service/matches.service';
+import { MatchesService } from '../services/matches.service';
 import { CreateMatchDTO, UpdateMatchDTO } from '../dtos/match.dto';
 
 @ApiTags('matches')

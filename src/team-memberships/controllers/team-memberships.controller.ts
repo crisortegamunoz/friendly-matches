@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Filter } from '../../common/filters/filter.dto';
-import { TeamMembershipsService } from '../service/team-memberships.service';
+import { TeamMembershipsService } from '../services/team-memberships.service';
 import { CreateTeamMembershipDTO, UpdateTeamMembershipDTO } from '../dtos/teamMembership.dto';
 @ApiTags('team-memberships')
 @Controller('team-memberships')
