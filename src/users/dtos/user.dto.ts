@@ -1,4 +1,4 @@
-import { ApiProperty, PartialType } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
 import { IsBoolean, IsDate, IsEmail, IsNotEmpty, IsOptional, IsString, IsUrl } from "class-validator";
 
 export class CreateUserDTO {
@@ -20,7 +20,7 @@ export class CreateUserDTO {
 
     @IsString()
     @IsOptional()
-    @ApiProperty({ description: 'User mother lastname' })
+    @ApiPropertyOptional({ description: 'User mother lastname' })
     lastname2?: string;
 
     @IsString()
@@ -36,7 +36,7 @@ export class CreateUserDTO {
 
     @IsString()
     @IsOptional()
-    @ApiProperty({ description: 'User phone' })
+    @ApiPropertyOptional({ description: 'User phone' })
     phone?: string;
 
     @IsDate()
@@ -47,11 +47,12 @@ export class CreateUserDTO {
     @IsString()
     @IsUrl()
     @IsOptional()
-    @ApiProperty({ description: 'User profile photo' })
+    @ApiPropertyOptional({ description: 'User profile photo' })
     photo?: string;
 
     @IsBoolean()
     @IsOptional()
+    @ApiPropertyOptional()
     isActive?: boolean;
 }
 

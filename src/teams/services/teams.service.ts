@@ -1,28 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 import { Filter } from '../../common/filters/filter.dto';
 import { CreateTeamDTO, UpdateTeamDTO } from '../dtos/team.dto';
+import { Team } from '../entities/team.entity';
+import { handleMongoDuplicateKeyError } from 'src/common/exceptions/team-exception';
 
 @Injectable()
 export class TeamsService {
 
+    constructor(@InjectModel(Team.name) private teamModel: Model<Team>) {
+
+    }
+
     findAll(filters: Filter) {
+        return this.teamModel.find().exec();
+    }
+
+    async findById(id: string) {
+        return this.teamModel.findById(id);
+    }
+
+    async create(data: CreateTeamDTO): Promise<Team> {
+        try {
+            const createdTeam = new this.teamModel(data);
+            return await createdTeam.save();
+        } catch (error) {
+            handleMongoDuplicateKeyError(error);
+        }
+    }
+
+    update(id: string, changes: UpdateTeamDTO) {
         return null;
     }
 
-    findById(id: string) {
+    async delete(id: string) {
+        const team = await this.findById(id);
+        if (!team) {
+            throw new NotFoundException(`Team not found`);
+        }
+        return this.teamModel.findByIdAndDelete(id);
+    }
+
+    findMemberships(id: string) {
         return null;
     }
 
-    create(payload: CreateTeamDTO) {
+    findMatches(id: string) {
         return null;
     }
 
-    update(id: string, payload: UpdateTeamDTO) {
-        return null;
-    }
-
-    delete(id: string) {
+    findStatistics(id: string) {
         return null;
     }
 

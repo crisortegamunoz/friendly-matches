@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { Filter } from '../../common/filters/filter.dto';
 import { CreateTeamDTO, UpdateTeamDTO } from '../dtos/team.dto';
 import { TeamsService } from '../services/teams.service';
+import { MongoIdPipe } from 'src/common/pipes/mongo-id.pipe';
 
 @ApiTags('teams')
 @Controller('teams')
@@ -72,8 +73,42 @@ export class TeamsController {
     @ApiResponse({ status: 204, description: 'The team has been successfully deleted.' })
     @ApiResponse({ status: 400, description: 'Invalid input.' })
     @ApiResponse({ status: 404, description: 'team not found' })
-    delete(@Param('id') id: string) {
+    @HttpCode(204)
+    delete(@Param('id', MongoIdPipe) id: string) {
         return this.teamService.delete(id);
+    }
+
+    @Get(':id/memberships')
+    @ApiOperation({ summary: 'Get team memberships', description: 'Retrieves a list of all current and historical memberships for a specific team, including roles and participation periods.' })
+    @ApiParam({ name: 'id', description: 'The unique identifier of the team', type: 'string' })
+    @ApiResponse({ status: 200, description: 'Successfully retrieved list of team memberships.' })
+    @ApiResponse({ status: 401, description: 'Unauthorized. Authentication token is missing or invalid.' })
+    @ApiResponse({ status: 403, description: 'Forbidden. User does not have necessary permissions to access this team\'s memberships.' })
+    @ApiResponse({ status: 404, description: 'Team not found. No team exists with the provided ID.' })
+    findMemberships(@Param('id') id: string) {
+        return this.teamService.findMemberships(id);
+    }
+
+    @Get(':id/matches')
+    @ApiOperation({ summary: 'Get team matches', description: 'Retrieves a list of all matches in which the team has participated, including opponents, results, and dates.' })
+    @ApiParam({ name: 'id', description: 'The unique identifier of the team', type: 'string' })
+    @ApiResponse({ status: 200, description: 'Successfully retrieved list of team\'s matches.' })
+    @ApiResponse({ status: 401, description: 'Unauthorized. Authentication token is missing or invalid.' })
+    @ApiResponse({ status: 403, description: 'Forbidden. User does not have necessary permissions to access this team\'s matches.' })
+    @ApiResponse({ status: 404, description: 'Team not found. No team exists with the provided ID.' })
+    findMatches(@Param('id') id: string) {
+        return this.teamService.findMatches(id);
+    }
+
+    @Get(':id/statistics')
+    @ApiOperation({ summary: 'Get team statistics', description: 'Retrieves general statistics for a specific team, such as matches played, won, lost, goals scored, etc.' })
+    @ApiParam({ name: 'id', description: 'The unique identifier of the team', type: 'string' })
+    @ApiResponse({ status: 200, description: 'Successfully retrieved team statistics.' })
+    @ApiResponse({ status: 401, description: 'Unauthorized. Authentication token is missing or invalid.' })
+    @ApiResponse({ status: 403, description: 'Forbidden. User does not have necessary permissions to access this team\'s statistics.' })
+    @ApiResponse({ status: 404, description: 'Team not found. No team exists with the provided ID.' })
+    findStatistics(@Param('id') id: string) {
+        return this.teamService.findById(id);
     }
 
 }
