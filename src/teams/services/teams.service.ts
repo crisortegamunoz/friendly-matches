@@ -19,7 +19,10 @@ export class TeamsService {
     }
 
     async findById(id: string) {
-        return this.teamModel.findById(id);
+        return this.teamModel
+            .findById(id)
+            .populate('captain')
+            .exec();
     }
 
     async create(data: CreateTeamDTO): Promise<Team> {
@@ -31,8 +34,12 @@ export class TeamsService {
         }
     }
 
-    update(id: string, changes: UpdateTeamDTO) {
-        return null;
+    async update(id: string, changes: UpdateTeamDTO) {
+        try {
+            return await this.teamModel.findByIdAndUpdate(id, { $set: changes }, { new: true }).exec();
+        } catch (error) {
+            handleMongoDuplicateKeyError(error);
+        }
     }
 
     async delete(id: string) {

@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from "@nestjs/swagger";
-import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString, IsUrl, MaxLength, Min } from "class-validator";
+import { IsBoolean, IsEnum, IsMongoId, IsNumber, IsOptional, IsString, IsUrl, MaxLength, Min } from "class-validator";
 import { AgeCategory, CompetitionLevel, GameFormat } from "../enums/team.enums";
 
 export class CreateTeamDTO {
@@ -42,8 +42,8 @@ export class CreateTeamDTO {
     logo?: string;
 
     @ApiProperty()
-    @IsString()
-    captainId: string;
+    @IsMongoId()
+    captain: string;
 
     @ApiPropertyOptional()
     @IsOptional()

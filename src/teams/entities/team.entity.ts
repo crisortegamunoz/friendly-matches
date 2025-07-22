@@ -31,8 +31,8 @@ export class Team extends Document {
     @Prop()
     logo?: string;
 
-    @Prop({ required: true, unique: true, type: Types.ObjectId, ref: User.name })
-    captainId: Types.ObjectId;
+    @Prop({ type: Types.ObjectId, ref: User.name, required: true, unique: true })
+    captain: User | Types.ObjectId;
 
     @Prop({ default: 0 })
     reputation?: number;
